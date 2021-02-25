@@ -1,0 +1,9 @@
+{
+    "name": "niels/php",
+    "require": {
+      "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {"Core\\": "src/"}
+    }
+}
