@@ -19,19 +19,22 @@ class BookController extends Controller
 
     public function index()
     {
-        $datas = $this->_model->getBooks();
-        $this->render('Book/index', ['datas' => $datas, 'title' => 'Page d\'accueil']);
+        if (isset($_POST['recherche'])) {
+            if (isset($_POST['query']) and !empty($_POST['query'])) {
+                $query = strval($_POST['query']);
+                $datas = $this->_model->getBooksByQuery($query);
+            } else {
+                throw new Exception('Erreur');
+            }
+        } else {
+            $datas = $this->_model->getBooks();
+        }
+        $this->render('Book/index', ['datas' => $datas, 'query' => (isset($query) ? $query : null), 'title' => 'Recherche']);
     }
 
-    public function search()
+    public function profil(string $isbn)
     {
-        if (isset($_POST['query']) and !empty($_POST['query'])) {
-            $query = strval($_POST['query']);
-            $datas = $this->_model->getBooksByQuery($query);
-            $this->render('Book/recherche', ['datas' => $datas, 'query' => $query, 'title' => 'Résultat de recherche']);
-        } else {
-            throw new Exception('Erreur');
-        }
+
     }
 
     public function delete(string $isbn)

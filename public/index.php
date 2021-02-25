@@ -12,14 +12,22 @@ use Core\App\Router;
 
 if (isset($_GET['url'])) {
     $router = new Router($_GET['url']);
-    $router->add('/', 'Book#index', 'GET');
-    $router->add('/recherche', 'Book#search', 'POST');
+    $router->add('/', 'Page#index', 'GET');
+
+    $router->add('/recherche', 'Book#index', 'GET');
+    $router->add('/recherche', 'Book#index', 'POST');
+
+    $router->add('/livre/:isbn', 'Book#profil', 'GET');
     $router->add('/livre/:isbn/supprimer', 'Book#delete', 'GET');
+
     $router->add('/connexion', 'User#logIn', 'GET');
     $router->add('/connexion', 'User#logIn', 'POST');
+
     $router->add('/deconnexion', 'User#logOut', 'GET');
+
     $router->add('/inscription', 'User#signUp', 'GET');
     $router->add('/inscription', 'User#signUp', 'POST');
+
     $router->add('/emprunt', 'Take#index', 'GET');
     $router->add('/mes-emprunts', 'Take#getUserTakes', 'GET');
     $router->add('/emprunt/:isbn/nouveau', 'Take#add', 'GET');

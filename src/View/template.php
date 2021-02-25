@@ -1,41 +1,27 @@
 <?php
 
-use Core\Controller\UserController;
-
 ?>
 <!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?php echo $title; ?></title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/bootstrap.css">
+    <title><?php echo $title; ?> - MaMédiathèque</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>assets/css/style.css">
 </head>
 <body>
-<h1><?php echo $title; ?></h1>
-<ul>
-    <li><a href="<?php echo WEB_ROOT; ?>">Index</a></li>
-    <?php
-    if (UserController::isConnected()) {
-        ?>
-        <li><a href="<?php echo WEB_ROOT; ?>emprunt">Emprunt</a></li>
-        <li><a href="<?php echo WEB_ROOT; ?>deconnexion">Deconnexion</a></li>
-    <?php } else {
-        ?>
-        <li><a href="<?php echo WEB_ROOT; ?>connexion">Connexion</a></li>
-        <li><a href="<?php echo WEB_ROOT; ?>inscription">Inscription</a></li>
-        <?php
-    }
-    ?>
-
-</ul>
-<form action="<?php echo WEB_ROOT; ?>recherche" method="POST">
-    <label for="query">Votre recherche : </label>
-    <input type="text" name="query" id="query" required/>
-    <br/>
-    <input type="submit" value="Valider"/>
-</form>
+<nav class="navbar navbar-light mt-20px">
+    <div class="container">
+        <a class="navbar-brand" href="<?php echo WEB_ROOT; ?>">
+            <img src="<?php echo WEB_ROOT; ?>assets/images/Page Title.svg" alt="">
+        </a>
+    </div>
+</nav>
 <?php echo $content; ?>
+<script src="<?php echo WEB_ROOT; ?>/assets/js/bootstrap.js"></script>
 </body>
 </html>

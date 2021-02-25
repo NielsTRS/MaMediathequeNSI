@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body {
+	font-family: 'Roboto', sans-serif;
+	background-color: #ECECEC;
+}
+
+.MainContent {
+	background-color: white;
+	border-radius: 15px;
+	margin-top: 40px;
+	padding: 40px 20px 40px 20px;
+}
+
+.mt-20px {
+	margin-top: 20px;
+}
+
+.bleuPale {
+	background-color: #1E90FF;
+}
+.bleuPale:hover {
+	background-color: #1e90ff;
+	box-shadow: 10px 5px 5px rgba(30, 144, 255, 0.2);
+}
+
+.bleuPale2 {
+	background-color: #70A1FF;
+}
+.bleuPale2:hover {
+	background-color: #70a1ff;
+	box-shadow: 10px 5px 5px rgba(112, 161, 255, 0.2);
+}
