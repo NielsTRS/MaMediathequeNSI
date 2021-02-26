@@ -2,8 +2,6 @@
 
 Projet de NSI
 
-[License](LICENSE.md)
-
 ## Présentation
 
 <table>
