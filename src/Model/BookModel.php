@@ -20,7 +20,7 @@ class BookModel extends Model
     public function getBooksByQuery(string $query)
     {
         $sql = $this->_getDatas();
-        $sql = ' WHERE a.nom LIKE :query OR l.titre LIKE :query OR l.annee LIKE :query ORDER BY l.annee ASC';
+        $sql .= ' WHERE a.nom LIKE :query OR l.titre LIKE :query OR l.annee LIKE :query ORDER BY l.annee ASC';
         $req = $this->getDB()->prepare($sql);
         $req->bindValue('query', "%$query%");
         $req->execute();

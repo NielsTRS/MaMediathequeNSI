@@ -1,8 +1,8 @@
 <div class="container MainContent">
-    <form class="row" action="" method="post" novalidate>
+    <form class="row" action="<?php echo WEB_ROOT ?>recherche" method="post" novalidate>
         <div class="col-md-4">
             <label for="search">Recherche:</label>
-            <input type="text" class="form-control" name="search" placeholder="Astérix et Obélix" required>
+            <input type="text" class="form-control" name="query" placeholder="Astérix et Obélix" required>
         </div>
         <div class="col-md-4">
             <label for="filter">Appliquer un filtre <span class="badge bg-danger">WIP</span></label>
@@ -17,9 +17,10 @@
         <button class="col-md-1 btn fas fa-search offset-md-2" name="recherche"></button>
     </form>
     <div class="SearchResult container">
-        <hr>
-        <p class="alert alert-success">Résultat(s) de votre recherche: X</p>
-        <p class="alert alert-danger">Recherche invalide, réessayez</p>
+        <hr/>
+        <?php if (!is_null($query)) { ?>
+            <p class="alert alert-success">Résultat(s) de votre recherche: <?php echo $query; ?></p>
+        <?php } ?>
     </div>
     <ul class="list-group list-group-flush Books mt-20px">
         <?php
