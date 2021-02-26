@@ -7,7 +7,7 @@ Projet de NSI
 <table>
 <tr>
 <td>
-Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les maitrisent
+Une bibliothèque à portée de clic
 </tr>
 </table>
 
