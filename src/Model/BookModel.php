@@ -59,7 +59,7 @@ class BookModel extends Model
 
     private function _getDatasQuery()
     {
-        return 'SELECT a.nom, l.titre, l.annee, e.retour FROM livre AS l JOIN auteur_de AS ad ON ad.isbn = l.isbn JOIN auteur AS a ON a.a_id = ad.a_id LEFT JOIN emprunt e on l.isbn = e.isbn';
+        return 'SELECT a.nom, l.titre, l.annee, e.retour, l.isbn FROM livre AS l JOIN auteur_de AS ad ON ad.isbn = l.isbn JOIN auteur AS a ON a.a_id = ad.a_id LEFT JOIN emprunt e on l.isbn = e.isbn';
     }
 
     private function _searchQuery()
