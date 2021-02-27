@@ -22,14 +22,24 @@ class BookController extends Controller
         if (isset($_POST['recherche'])) {
             if (isset($_POST['query']) and !empty($_POST['query'])) {
                 $query = strval($_POST['query']);
-                $datas = $this->_model->getBooksByQuery($query);
+                if (isset($_POST['filter']) and !empty($_POST['filter'])) {
+                    $filter = intval($_POST['filter']);
+                    $datas = $this->_model->getBooksByQueryFiltered($query, $filter);
+                } else {
+                    $datas = $this->_model->getBooksByQuery($query);
+                }
             } else {
-                throw new Exception('Erreur');
+                if (isset($_POST['filter']) and !empty($_POST['filter'])) {
+                    $filter = intval($_POST['filter']);
+                    $datas = $this->_model->getBooksByFilter($filter);
+                } else {
+                    $datas = $this->_model->getBooks();
+                }
             }
         } else {
             $datas = $this->_model->getBooks();
         }
-        $this->render('Book/index', ['datas' => $datas, 'query' => (isset($query) ? $query : null), 'title' => 'Recherche']);
+        $this->render('Book/index', ['datas' => $datas, 'query' => (isset($query) ? $query : null), 'filter' => (isset($filter) ? $filter : null), 'title' => 'Recherche']);
     }
 
     public function profil(string $isbn)

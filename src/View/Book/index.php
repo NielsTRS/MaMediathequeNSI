@@ -2,19 +2,31 @@
     <form class="row" action="<?php echo WEB_ROOT ?>recherche" method="post" novalidate>
         <div class="col-md-4">
             <label for="search">Recherche:</label>
-            <input type="text" class="form-control" name="query" placeholder="Astérix et Obélix" required>
+            <input type="text" class="form-control" name="query" placeholder="Astérix et Obélix" required
+                   value="<?php echo (!is_null($query)) ? $query : null; ?>"/>
         </div>
         <div class="col-md-4">
-            <label for="filter">Appliquer un filtre <span class="badge bg-danger">WIP</span></label>
+            <label for="filter">Appliquer un filtre</label>
             <select class="form-select" aria-label="Filtrer" name="filter">
-                <option value="none" selected>Filtrer...</option>
-                <option value="1">Triez le Titre par ordre croissant (A-Z)</option>
-                <option value="2">Triez le Titre par ordre décroissant (Z-A)</option>
-                <option value="3">Triez l'Auteurice par ordre croissant (A-Z)</option>
-                <option value="4">Triez l'Auteurice par ordre décroissant (Z-A)</option>
+                <option value="" selected>Filtrer...</option>
+                <option value="1" <?php echo (!is_null($filter) and $filter === 1) ? 'selected="selected"' : null; ?>>
+                    Triez le Titre par ordre croissant (A-Z)
+                </option>
+                <option value="2" <?php echo (!is_null($filter) and $filter === 2) ? 'selected="selected"' : null; ?>>
+                    Triez le Titre par ordre décroissant (Z-A)
+                </option>
+                <option value="3" <?php echo (!is_null($filter) and $filter === 3) ? 'selected="selected"' : null; ?>>
+                    Triez l'Auteur par ordre croissant (A-Z)
+                </option>
+                <option value="4" <?php echo (!is_null($filter) and $filter === 4) ? 'selected="selected"' : null; ?>>
+                    Triez l'Auteur par ordre décroissant (Z-A)
+                </option>
             </select>
         </div>
-        <button class="col-md-1 btn fas fa-search offset-md-2" name="recherche"></button>
+        <div class="col-md-4">
+            <br/>
+            <button class="btn btn-primary" name="recherche" type="submit">Rechercher</button>
+        </div>
     </form>
     <div class="SearchResult container">
         <hr/>
