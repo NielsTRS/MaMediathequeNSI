@@ -24,20 +24,12 @@ Paquets nécessaires :
 
 * php
 * mysql
-* composer
 * phpmyadmin
 
 Téléchargement des fichiers :
 
 ``` bash 
 git clone https://github.com/NielsTRS/MaMediathequeNSI.git
-```
-
-Installation des dépendances :
-
-``` bash 
-cd MaMediathequeNSI
-composer install
 ```
 
 Configuration de la base de données :
