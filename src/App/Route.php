@@ -3,20 +3,46 @@
 namespace Core\App;
 
 
+/**
+ * Class Route
+ * @package Core\App
+ */
 class Route
 {
 
+    /**
+     * @var string
+     */
     private $_path;
+    /**
+     * @var
+     */
     private $_callable;
+    /**
+     * @var array
+     */
     private $_matches = [];
+    /**
+     * @var array
+     */
     private $_params = [];
 
+    /**
+     * Route constructor.
+     * @param $path
+     * @param $callable
+     */
     public function __construct($path, $callable)
     {
         $this->_path = trim($path, '/');  // remove unused "/"
         $this->_callable = $callable;
     }
 
+    /**
+     * Get the params from the url
+     * @param $url
+     * @return bool
+     */
     public function match($url)
     {
         $url = trim($url, '/');
@@ -30,6 +56,10 @@ class Route
         return true;
     }
 
+    /**
+     * Call a controller
+     * @return false|mixed
+     */
     public function call()
     {
         if (is_string($this->_callable)) {
@@ -42,6 +72,10 @@ class Route
         }
     }
 
+    /**
+     * @param $match
+     * @return string
+     */
     private function paramMatch($match)
     {
         if (isset($this->_params[$match[1]])) {

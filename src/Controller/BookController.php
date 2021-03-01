@@ -8,15 +8,29 @@ use Core\Model\BookModel;
 use Exception;
 
 
+/**
+ * Class BookController
+ * @package Core\Controller
+ */
 class BookController extends Controller
 {
+    /**
+     * @var BookModel
+     */
     private $_model;
 
+    /**
+     * BookController constructor.
+     */
     public function __construct()
     {
         $this->_model = new BookModel();
     }
 
+    /**
+     * Admin page
+     * @throws Exception
+     */
     public function admin()
     {
         if (UserController::isCurrentAdmin()) {
@@ -27,6 +41,9 @@ class BookController extends Controller
         }
     }
 
+    /**
+     * List books
+     */
     public function index()
     {
         if (isset($_POST['recherche'])) {
@@ -52,12 +69,21 @@ class BookController extends Controller
         $this->render('Book/index', ['datas' => $datas, 'query' => (isset($query) ? $query : null), 'filter' => (isset($filter) ? $filter : null), 'title' => 'Recherche']);
     }
 
+    /**
+     * Show book informations
+     * @param string $isbn
+     */
     public function profil(string $isbn)
     {
         $datas = $this->_model->getBookByIsbn($isbn);
         $this->render('Book/profil', ['datas' => $datas, 'title' => 'Profil de livre']);
     }
 
+    /**
+     * Delete a book
+     * @param string $isbn
+     * @throws Exception
+     */
     public function delete(string $isbn)
     {
         if (UserController::isCurrentAdmin()) {

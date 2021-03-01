@@ -8,21 +8,38 @@ use Core\Model\TakeModel;
 use Exception;
 
 
+/**
+ * Class TakeController
+ * @package Core\Controller
+ */
 class TakeController extends Controller
 {
+    /**
+     * @var TakeModel
+     */
     private $_model;
 
+    /**
+     * TakeController constructor.
+     */
     public function __construct()
     {
         $this->_model = new TakeModel();
     }
 
+    /**
+     * List the taken books
+     */
     public function index()
     {
         $datas = $this->_model->getTakes();
         $this->render('Take/index', ['datas' => $datas, 'title' => 'Page d\'emprunt']);
     }
 
+    /**
+     * Admin page
+     * @throws Exception
+     */
     public function admin()
     {
         if (UserController::isCurrentAdmin()) {
@@ -33,17 +50,11 @@ class TakeController extends Controller
         }
     }
 
-    public function getUserTakes(string $code)
-    {
-        if (UserController::isConnected()) {
-            $datas = $this->_model->getByUserCode($code);
-            $this->render('Take/index', ['datas' => $datas, 'title' => 'Page d\'emprunt']);
-        } else {
-            throw new Exception('Veuillez vous connecter');
-        }
-
-    }
-
+    /**
+     * Add a book to the list of taken
+     * @param string $isbn
+     * @throws Exception
+     */
     public function add(string $isbn)
     {
         if (UserController::isConnected()) {
@@ -55,6 +66,11 @@ class TakeController extends Controller
         }
     }
 
+    /**
+     * Delete a taken book
+     * @param string $isbn
+     * @throws Exception
+     */
     public function delete(string $isbn)
     {
         if (UserController::isCurrentAdmin()) {

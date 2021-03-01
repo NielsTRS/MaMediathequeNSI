@@ -2,8 +2,16 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+/**
+ * Get automatically the web root of the website
+ */
 define('WEB_ROOT', str_replace('index.php', '', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']));
+
+/**
+ * Get automatically the root of the website
+ */
 define('ROOT', str_replace('public/index.php', '', $_SERVER['SCRIPT_FILENAME']));
+
 session_start();
 
 require('../vendor/autoload.php');
@@ -29,7 +37,6 @@ if (isset($_GET['url'])) {
     $router->add('/profil/:code', 'User#profil', 'GET');
 
     $router->add('/emprunt', 'Take#index', 'GET');
-    $router->add('/mes-emprunts', 'Take#getUserTakes', 'GET');
     $router->add('/emprunt/:isbn/nouveau', 'Take#add', 'GET');
     $router->add('/emprunt/:isbn/supprimer', 'Take#delete', 'GET');
     $router->add('/emprunt/admin', 'Take#admin', 'GET');

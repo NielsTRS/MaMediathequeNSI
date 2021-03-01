@@ -7,18 +7,39 @@ namespace Core\Controller;
 use Core\App\Controller;
 use Core\Model\TakeModel;
 use Core\Model\UserModel;
+use Exception;
 
+/**
+ * Class UserController
+ * @package Core\Controller
+ */
 class UserController extends Controller
 {
+    /**
+     * @var int
+     */
     private static $_ROLE_ADMIN = 1;
+    /**
+     * @var int
+     */
     private static $_ROLE_USER = 0;
+    /**
+     * @var UserModel
+     */
     private $_model;
 
+    /**
+     * UserController constructor.
+     */
     public function __construct()
     {
         $this->_model = new UserModel();
     }
 
+    /**
+     * Verify is the current user is admin
+     * @return bool
+     */
     public static function isCurrentAdmin()
     {
         if (isset($_SESSION['nom']) and !empty($_SESSION['nom']) and intval($_SESSION['role']) === UserController::$_ROLE_ADMIN) {
@@ -28,6 +49,23 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Verify is the current user is connected
+     * @return bool
+     */
+    public static function isConnected()
+    {
+        if (isset($_SESSION['nom']) and !empty($_SESSION['nom'])) {
+            return True;
+        } else {
+            return False;
+        }
+    }
+
+    /**
+     * Login a user
+     * @throws Exception
+     */
     public function logIn()
     {
         if (self::isConnected()) {
@@ -41,7 +79,7 @@ class UserController extends Controller
                 if ($user !== false and password_verify($password, $user['password'])) {
                     $_SESSION['nom'] = $nom;
                     $_SESSION['code'] = $user['code_barre'];
-                    $_SESSION['csrf'] = strval(bin2hex(random_bytes(16)));
+//                    $_SESSION['csrf'] = strval(bin2hex(random_bytes(16)));
                     $_SESSION['role'] = $user['role'];
                     header('Location: ' . WEB_ROOT);
                 } else {
@@ -54,15 +92,9 @@ class UserController extends Controller
         $this->render('User/connexion', ['msg' => (isset($msg) ? $msg : null), 'title' => 'Connexion']);
     }
 
-    public static function isConnected()
-    {
-        if (isset($_SESSION['nom']) and !empty($_SESSION['nom'])) {
-            return True;
-        } else {
-            return False;
-        }
-    }
-
+    /**
+     * Create a new user
+     */
     public function signUp()
     {
         if (self::isConnected()) {
@@ -89,6 +121,11 @@ class UserController extends Controller
         $this->render('User/inscription', ['msg' => (isset($msg) ? $msg : null), 'title' => 'Inscription']);
     }
 
+    /**
+     * Generate a code too a new user
+     * @param int $lenght
+     * @return int|string
+     */
     private function generateCode(int $lenght)
     {
         $code = mt_rand(1, 9);
@@ -98,6 +135,9 @@ class UserController extends Controller
         return $code;
     }
 
+    /**
+     * Disconnect a user
+     */
     public function logOut()
     {
         if (self::isConnected()) {
@@ -108,6 +148,10 @@ class UserController extends Controller
         header('Location: ' . WEB_ROOT);
     }
 
+    /**
+     * Show the profil of a user
+     * @param string $code
+     */
     public function profil(string $code)
     {
         $datas = $this->_model->getUserByCode($code);

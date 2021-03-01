@@ -12,11 +12,27 @@ use PDO;
 abstract class Model
 {
 
+    /**
+     * @var string
+     */
     private $_host = '127.0.0.1';
+    /**
+     * @var string
+     */
     private $_dbname = 'nsi';
+    /**
+     * @var string
+     */
     private $_user = 'niels';
+    /**
+     * @var string
+     */
     private $_password = '';
 
+    /**
+     * Get the connexion with the DataBase
+     * @return PDO
+     */
     protected function getDB(): PDO
     {
         try {
