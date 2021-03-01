@@ -29,7 +29,7 @@ class TakeModel extends Model
 
     private function _getDatasQuery()
     {
-        return 'SELECT u.nom, l.titre, e.retour, e.isbn FROM emprunt AS e JOIN usager AS u on u.code_barre = e.code_barre JOIN livre AS l on l.isbn = e.isbn';
+        return 'SELECT u.nom, u.prenom, l.titre, e.retour, e.isbn FROM emprunt AS e JOIN usager AS u on u.code_barre = e.code_barre JOIN livre AS l on l.isbn = e.isbn';
     }
 
     public function getByUserCode(string $code)
