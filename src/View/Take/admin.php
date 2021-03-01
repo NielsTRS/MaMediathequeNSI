@@ -17,7 +17,7 @@
                                 <li class="list-group-item d-flex">
                                     <div class="d-flex me-auto">
                                         <div class="d-flex flex-column">
-                                            <p class="h4 text-center"><?php echo htmlspecialchars($data['nom']); ?></p>
+                                            <p class="h4 text-center"><?php echo "".htmlspecialchars($data['nom'])." ".htmlspecialchars($data['prenom']); ?></p>
                                             <div class="d-flex">
                                                 <a class="h2" style="text-decoration: none;"
                                                    href="<?php echo WEB_ROOT; ?>livre/profil/<?php echo $data['isbn']; ?>"><?php echo htmlspecialchars($data['titre']); ?></a>
