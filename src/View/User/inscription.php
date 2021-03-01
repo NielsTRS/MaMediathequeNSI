@@ -46,7 +46,7 @@
     </div>
     <?php if (!is_null($msg)) {
         echo '<div class="d-flex justify-content-center">
-        <p class="col-md-10 alert alert-danger">' . $msg . '</p>
+        <p class="col-md-10 alert alert-info mt-20px">' . $msg . '</p>
     </div>';
     } ?>
 </div>
