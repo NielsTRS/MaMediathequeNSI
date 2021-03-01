@@ -62,6 +62,18 @@ class TakeModel extends Model
     }
 
     /**
+     * Get taken books by user
+     * @param string $code
+     * @return array
+     */
+    public function getByUserCode(string $code)
+    {
+        $req = $this->getDB()->prepare($this->_getDatasQuery() . ' WHERE u.code_barre = ?');
+        $req->execute([$code]);
+        return $req->fetchAll();
+    }
+
+    /**
      * Remove taken books older than the current date automatically
      * @return bool
      */
