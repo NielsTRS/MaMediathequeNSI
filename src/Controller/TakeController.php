@@ -33,10 +33,10 @@ class TakeController extends Controller
         }
     }
 
-    public function getUserTakes()
+    public function getUserTakes(string $code)
     {
         if (UserController::isConnected()) {
-            $datas = $this->_model->getByUser($_SESSION['nom']);
+            $datas = $this->_model->getByUserCode($code);
             $this->render('Take/index', ['datas' => $datas, 'title' => 'Page d\'emprunt']);
         } else {
             throw new Exception('Veuillez vous connecter');
@@ -48,8 +48,8 @@ class TakeController extends Controller
     {
         if (UserController::isConnected()) {
             $date = date('Y-m-d', strtotime(date('Y-m-d') . ' + 15 days'));
-            $this->_model->createTake($_SESSION['code_barre'], $isbn, $date);
-            header('Location: ' . WEB_ROOT . 'mes-emprunts');
+            $this->_model->createTake($_SESSION['code'], $isbn, $date);
+            header('Location: ' . WEB_ROOT . 'profil/' . $_SESSION['code']);
         } else {
             throw new Exception('Veuillez vous connecter');
         }
@@ -60,6 +60,9 @@ class TakeController extends Controller
         if (UserController::isCurrentAdmin()) {
             $this->_model->removeTake($isbn);
             header('Location: ' . WEB_ROOT . 'emprunt/admin');
+        } elseif (UserController::isConnected()) {
+            $this->_model->removeTake($isbn, $_SESSION['code']);
+            header('Location: ' . WEB_ROOT . 'profil/' . $_SESSION['code']);
         } else {
             throw new Exception('Veuillez vous connecter');
         }

@@ -54,14 +54,15 @@ class BookController extends Controller
 
     public function profil(string $isbn)
     {
-
+        $datas = $this->_model->getBookByIsbn($isbn);
+        $this->render('Book/profil', ['datas' => $datas, 'title' => 'Profil de livre']);
     }
 
     public function delete(string $isbn)
     {
         if (UserController::isCurrentAdmin()) {
             if ($this->_model->deleteBook($isbn)) {
-                header('Location: ' . WEB_ROOT.'livre/admin');
+                header('Location: ' . WEB_ROOT . 'livre/admin');
             } else {
                 throw new Exception('Erreur');
             }

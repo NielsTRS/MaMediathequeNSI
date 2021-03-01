@@ -21,11 +21,9 @@
                                             <div class="d-flex">
                                                 <a class="h2" style="text-decoration: none;"
                                                    href="<?php echo WEB_ROOT; ?>livre/profil/<?php echo $data['isbn']; ?>"><?php echo htmlspecialchars($data['titre']); ?></a>
-                                                <!-- Mettre l'isbn du livre dans l'href -->
                                                 <p class="badge bg-primary align-self-end ShowBookTitle"
                                                    style="margin-left: 10px;"> A rendre
                                                     le <?php echo htmlspecialchars($data['retour']); ?></p>
-                                                <!-- Remplacer les variables avec la date de retour -->
                                             </div>
                                         </div>
                                     </div>

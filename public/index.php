@@ -23,11 +23,10 @@ if (isset($_GET['url'])) {
 
     $router->add('/connexion', 'User#logIn', 'GET');
     $router->add('/connexion', 'User#logIn', 'POST');
-
     $router->add('/deconnexion', 'User#logOut', 'GET');
-
     $router->add('/inscription', 'User#signUp', 'GET');
     $router->add('/inscription', 'User#signUp', 'POST');
+    $router->add('/profil/:code', 'User#profil', 'GET');
 
     $router->add('/emprunt', 'Take#index', 'GET');
     $router->add('/mes-emprunts', 'Take#getUserTakes', 'GET');

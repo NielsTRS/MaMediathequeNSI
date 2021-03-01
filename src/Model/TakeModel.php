@@ -13,6 +13,13 @@ class TakeModel extends Model
         $this->_purgeTakes();
     }
 
+    private function _purgeTakes()
+    {
+        $currentDate = date('Y-m-d');
+        $req = $this->getDB()->prepare('DELETE FROM emprunt WHERE emprunt.retour < ?;');
+        return $req->execute([$currentDate]);
+    }
+
     public function getTakes()
     {
         $req = $this->getDB()->prepare($this->_getDatasQuery());
@@ -20,10 +27,15 @@ class TakeModel extends Model
         return $req->fetchAll();
     }
 
-    public function getByUser(string $user)
+    private function _getDatasQuery()
     {
-        $req = $this->getDB()->prepare($this->_getDatasQuery() . ' WHERE u.nom = ?');
-        $req->execute([$user]);
+        return 'SELECT u.nom, l.titre, e.retour, e.isbn FROM emprunt AS e JOIN usager AS u on u.code_barre = e.code_barre JOIN livre AS l on l.isbn = e.isbn';
+    }
+
+    public function getByUserCode(string $code)
+    {
+        $req = $this->getDB()->prepare($this->_getDatasQuery() . ' WHERE u.code_barre = ?');
+        $req->execute([$code]);
         return $req->fetchAll();
     }
 
@@ -33,21 +45,14 @@ class TakeModel extends Model
         return $req->execute([$code, $isbn, $date]);
     }
 
-    public function removeTake(string $isbn)
+    public function removeTake(string $isbn, string $code = null)
     {
-        $req = $this->getDB()->prepare('DELETE FROM emprunt WHERE emprunt.isbn = ?;');
-        return $req->execute([$isbn]);
-    }
-
-    private function _purgeTakes()
-    {
-        $currentDate = date('Y-m-d');
-        $req = $this->getDB()->prepare('DELETE FROM emprunt WHERE emprunt.retour < ?;');
-        return $req->execute([$currentDate]);
-    }
-
-    private function _getDatasQuery()
-    {
-        return 'SELECT u.nom, l.titre, e.retour, e.isbn FROM emprunt AS e JOIN usager AS u on u.code_barre = e.code_barre JOIN livre AS l on l.isbn = e.isbn';
+        if (is_null($code)) {
+            $req = $this->getDB()->prepare('DELETE FROM emprunt WHERE emprunt.isbn = ?;');
+            return $req->execute([$isbn]);
+        } else {
+            $req = $this->getDB()->prepare('DELETE FROM emprunt WHERE emprunt.isbn = ? AND emprunt.code_barre = ?;');
+            return $req->execute([$isbn, $code]);
+        }
     }
 }

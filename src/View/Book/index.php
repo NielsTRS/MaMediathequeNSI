@@ -49,7 +49,7 @@
                     <h3><?php echo htmlspecialchars($data['nom']) . ' / ' . htmlspecialchars($data['annee']); ?></h3>
                 </div>
                 <div class="d-grid gap-2 d-md-flex align-self-center justify-content-md-end">
-                    <a href="<?php echo WEB_ROOT . 'livre/' . $data['isbn']; ?>">
+                    <a href="<?php echo WEB_ROOT . 'livre/profil/' . $data['isbn']; ?>">
                         <button class="btn btn-primary">Plus d'informations</button>
                     </a>
                 </div>

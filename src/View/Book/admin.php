@@ -16,7 +16,8 @@
                             <?php foreach ($datas as $data) { ?>
                                 <li class="list-group-item d-flex">
                                     <div class="d-flex me-auto gap-4">
-                                        <a href="<?php echo WEB_ROOT; ?>livre/profil/<?php echo $data['isbn']; ?>" class="h2"
+                                        <a href="<?php echo WEB_ROOT; ?>livre/profil/<?php echo $data['isbn']; ?>"
+                                           class="h2"
                                            style="text-decoration: none;"><?php echo htmlspecialchars($data['titre']) . ' (' . htmlspecialchars($data['nom']) . ')'; ?></a>
                                     </div>
                                     <div>

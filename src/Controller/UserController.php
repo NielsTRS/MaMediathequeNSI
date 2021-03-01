@@ -5,6 +5,7 @@ namespace Core\Controller;
 
 
 use Core\App\Controller;
+use Core\Model\TakeModel;
 use Core\Model\UserModel;
 
 class UserController extends Controller
@@ -16,6 +17,15 @@ class UserController extends Controller
     public function __construct()
     {
         $this->_model = new UserModel();
+    }
+
+    public static function isCurrentAdmin()
+    {
+        if (isset($_SESSION['nom']) and !empty($_SESSION['nom']) and intval($_SESSION['role']) === UserController::$_ROLE_ADMIN) {
+            return True;
+        } else {
+            return False;
+        }
     }
 
     public function logIn()
@@ -30,7 +40,7 @@ class UserController extends Controller
                 $user = $this->_model->checkUser($nom);
                 if ($user !== false and password_verify($password, $user['password'])) {
                     $_SESSION['nom'] = $nom;
-                    $_SESSION['code_barre'] = $user['code_barre'];
+                    $_SESSION['code'] = $user['code_barre'];
                     $_SESSION['csrf'] = strval(bin2hex(random_bytes(16)));
                     $_SESSION['role'] = $user['role'];
                     header('Location: ' . WEB_ROOT);
@@ -42,6 +52,15 @@ class UserController extends Controller
             }
         }
         $this->render('User/connexion', ['msg' => (isset($msg) ? $msg : null), 'title' => 'Connexion']);
+    }
+
+    public static function isConnected()
+    {
+        if (isset($_SESSION['nom']) and !empty($_SESSION['nom'])) {
+            return True;
+        } else {
+            return False;
+        }
     }
 
     public function signUp()
@@ -70,6 +89,15 @@ class UserController extends Controller
         $this->render('User/inscription', ['msg' => (isset($msg) ? $msg : null), 'title' => 'Inscription']);
     }
 
+    private function generateCode(int $lenght)
+    {
+        $code = mt_rand(1, 9);
+        for ($i = 0; $i < 14; $i++) {
+            $code .= mt_rand(0, 9);
+        }
+        return $code;
+    }
+
     public function logOut()
     {
         if (self::isConnected()) {
@@ -80,35 +108,10 @@ class UserController extends Controller
         header('Location: ' . WEB_ROOT);
     }
 
-    public function profil(string $isbn)
+    public function profil(string $code)
     {
-
-    }
-
-    public static function isCurrentAdmin()
-    {
-        if (isset($_SESSION['nom']) and !empty($_SESSION['nom']) and intval($_SESSION['role']) === UserController::$_ROLE_ADMIN) {
-            return True;
-        } else {
-            return False;
-        }
-    }
-
-    public static function isConnected()
-    {
-        if (isset($_SESSION['nom']) and !empty($_SESSION['nom'])) {
-            return True;
-        } else {
-            return False;
-        }
-    }
-
-    private function generateCode(int $lenght)
-    {
-        $code = mt_rand(1, 9);
-        for ($i = 0; $i < 14; $i++) {
-            $code .= mt_rand(0, 9);
-        }
-        return $code;
+        $datas = $this->_model->getUserByCode($code);
+        $takes = (new TakeModel())->getByUserCode($code);
+        $this->render('User/profil', ['datas' => $datas, 'takes' => $takes, 'title' => 'Profil Utilisateur']);
     }
 }
