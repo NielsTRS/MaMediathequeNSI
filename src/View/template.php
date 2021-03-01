@@ -28,5 +28,6 @@ use Core\Controller\UserController;
 </nav>
 <?php echo $content; ?>
 <script src="<?php echo WEB_ROOT; ?>/assets/js/bootstrap.js"></script>
+<script src="<?php echo WEB_ROOT; ?>/assets/js/fontawesome.js"></script>
 </body>
 </html>
