@@ -31,26 +31,6 @@ class TakeModel extends Model
         return $req->fetchAll();
     }
 
-<<<<<<< HEAD
-    /**
-     * Get taken books by user
-     * @param string $code
-     * @return array
-     */
-=======
-    private function _getDatasQuery()
-    {
-        return 'SELECT u.nom, u.prenom, l.titre, e.retour, e.isbn FROM emprunt AS e JOIN usager AS u on u.code_barre = e.code_barre JOIN livre AS l on l.isbn = e.isbn';
-    }
-
->>>>>>> 1198e4eba437c3630d96270357f472d0bd8dd7c4
-    public function getByUserCode(string $code)
-    {
-        $req = $this->getDB()->prepare($this->_getDatasQuery() . ' WHERE u.code_barre = ?');
-        $req->execute([$code]);
-        return $req->fetchAll();
-    }
-
     /**
      * Create a taken book
      * @param string $code
@@ -98,6 +78,6 @@ class TakeModel extends Model
      */
     private function _getDatasQuery()
     {
-        return 'SELECT u.nom, l.titre, e.retour, e.isbn FROM emprunt AS e JOIN usager AS u on u.code_barre = e.code_barre JOIN livre AS l on l.isbn = e.isbn';
+        return 'SELECT u.nom, u.prenom, l.titre, e.retour, e.isbn FROM emprunt AS e JOIN usager AS u on u.code_barre = e.code_barre JOIN livre AS l on l.isbn = e.isbn';
     }
 }
