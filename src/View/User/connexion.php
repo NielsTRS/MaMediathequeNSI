@@ -9,7 +9,7 @@
         <form class="col-md-10 mt-20px" action="<?php echo WEB_ROOT; ?>connexion" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Nom d'utilisateur</label>
-                <input type="user" class="form-control" name="nom" aria-describedby="userHelp" required/>
+                <input type="text" class="form-control" name="nom" aria-describedby="userHelp" required/>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Mot de passe</label>
