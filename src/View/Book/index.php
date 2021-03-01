@@ -1,3 +1,9 @@
+<?php 
+
+use Core\Controller\UserController;
+
+?>
+
 <div class="container MainContent">
     <form class="row" action="<?php echo WEB_ROOT ?>recherche" method="post" novalidate>
         <div class="col-md-4">
@@ -49,6 +55,11 @@
                     <h3><?php echo htmlspecialchars($data['nom']) . ' / ' . htmlspecialchars($data['annee']); ?></h3>
                 </div>
                 <div class="d-grid gap-2 d-md-flex align-self-center justify-content-md-end">
+                    <?php
+                        if (UserController::isConnected()) {
+                            echo '<a href="'.WEB_ROOT.'emprunt/'.$data['isbn'].'/nouveau" ><button class="btn btn-secondary">Emprunter</button></a>';
+                        }
+                    ?>
                     <a href="<?php echo WEB_ROOT . 'livre/profil/' . $data['isbn']; ?>">
                         <button class="btn btn-primary">Plus d'informations</button>
                     </a>
