@@ -17,7 +17,8 @@ if (isset($_GET['url'])) {
     $router->add('/recherche', 'Book#index', 'GET');
     $router->add('/recherche', 'Book#index', 'POST');
 
-    $router->add('/livre/:isbn', 'Book#profil', 'GET');
+    $router->add('/livre/admin', 'Book#admin', 'GET');
+    $router->add('/livre/profil/:isbn', 'Book#profil', 'GET');
     $router->add('/livre/:isbn/supprimer', 'Book#delete', 'GET');
 
     $router->add('/connexion', 'User#logIn', 'GET');
@@ -32,6 +33,7 @@ if (isset($_GET['url'])) {
     $router->add('/mes-emprunts', 'Take#getUserTakes', 'GET');
     $router->add('/emprunt/:isbn/nouveau', 'Take#add', 'GET');
     $router->add('/emprunt/:isbn/supprimer', 'Take#delete', 'GET');
+    $router->add('/emprunt/admin', 'Take#admin', 'GET');
 
     $router->run();
 } else {

@@ -9,15 +9,19 @@
         <form class="col-md-10 mt-20px" action="<?php echo WEB_ROOT; ?>inscription" method="post">
             <div class="mb-3">
                 <label for="name" class="form-label">Nom</label>
-                <input type="user" class="form-control" name="nom" placeholder="Dupont" required/>
+                <input type="text" class="form-control" name="nom" placeholder="Dupont" required/>
             </div>
             <div class="mb-3">
                 <label for="prenom" class="form-label">Prénom</label>
-                <input type="user" class="form-control" name="prenom" placeholder="Dupont" required/>
+                <input type="text" class="form-control" name="prenom" placeholder="Dupont" required/>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Adresse e-mail</label>
                 <input type="email" class="form-control" name="email" placeholder="test@example.com" required/>
+            </div>
+            <div class="mb-3">
+                <label for="adresse" class="form-label">Adresse</label>
+                <input type="text" class="form-control" name="adresse" placeholder="15 rue des Champs" required/>
             </div>
             <div class="mb-3">
                 <label for="cp" class="form-label">Code Postal</label>

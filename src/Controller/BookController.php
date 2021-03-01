@@ -17,6 +17,16 @@ class BookController extends Controller
         $this->_model = new BookModel();
     }
 
+    public function admin()
+    {
+        if (UserController::isCurrentAdmin()) {
+            $datas = $this->_model->getBooks();
+            $this->render('Book/admin', ['datas' => $datas, 'title' => 'Page d\'administration']);
+        } else {
+            throw new Exception('Vous n\'avez pas les droits');
+        }
+    }
+
     public function index()
     {
         if (isset($_POST['recherche'])) {
@@ -51,7 +61,7 @@ class BookController extends Controller
     {
         if (UserController::isCurrentAdmin()) {
             if ($this->_model->deleteBook($isbn)) {
-                header('Location: ' . WEB_ROOT);
+                header('Location: ' . WEB_ROOT.'livre/admin');
             } else {
                 throw new Exception('Erreur');
             }

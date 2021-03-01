@@ -1,5 +1,7 @@
 <?php
 
+use Core\Controller\UserController;
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -21,7 +23,7 @@
         </a>
         <?php if (UserController::isConnected()) {
             echo '<a href="' . WEB_ROOT . 'deconnexion" class="btn btn-danger float-end">Se Déconnecter</a>';
-        }?>
+        } ?>
     </div>
 </nav>
 <?php echo $content; ?>

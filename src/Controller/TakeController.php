@@ -23,6 +23,16 @@ class TakeController extends Controller
         $this->render('Take/index', ['datas' => $datas, 'title' => 'Page d\'emprunt']);
     }
 
+    public function admin()
+    {
+        if (UserController::isCurrentAdmin()) {
+            $datas = $this->_model->getTakes();
+            $this->render('Take/admin', ['datas' => $datas, 'title' => 'Page d\'administration']);
+        } else {
+            throw new Exception('Vous n\'avez pas les droits');
+        }
+    }
+
     public function getUserTakes()
     {
         if (UserController::isConnected()) {
@@ -49,7 +59,7 @@ class TakeController extends Controller
     {
         if (UserController::isCurrentAdmin()) {
             $this->_model->removeTake($isbn);
-            header('Location: ' . WEB_ROOT . 'emprunt');
+            header('Location: ' . WEB_ROOT . 'emprunt/admin');
         } else {
             throw new Exception('Veuillez vous connecter');
         }

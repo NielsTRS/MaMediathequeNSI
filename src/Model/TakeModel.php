@@ -15,14 +15,14 @@ class TakeModel extends Model
 
     public function getTakes()
     {
-        $req = $this->getDB()->prepare('SELECT u.nom, l.titre, e.retour, e.isbn FROM emprunt AS e JOIN usager AS u on u.code_barre = e.code_barre JOIN livre AS l on l.isbn = e.isbn');
+        $req = $this->getDB()->prepare($this->_getDatasQuery());
         $req->execute();
         return $req->fetchAll();
     }
 
     public function getByUser(string $user)
     {
-        $req = $this->getDB()->prepare('SELECT u.nom, l.titre, e.retour, e.isbn FROM emprunt AS e JOIN usager AS u on u.code_barre = e.code_barre JOIN livre AS l on l.isbn = e.isbn WHERE u.nom = ?');
+        $req = $this->getDB()->prepare($this->_getDatasQuery() . ' WHERE u.nom = ?');
         $req->execute([$user]);
         return $req->fetchAll();
     }
@@ -44,5 +44,10 @@ class TakeModel extends Model
         $currentDate = date('Y-m-d');
         $req = $this->getDB()->prepare('DELETE FROM emprunt WHERE emprunt.retour < ?;');
         return $req->execute([$currentDate]);
+    }
+
+    private function _getDatasQuery()
+    {
+        return 'SELECT u.nom, l.titre, e.retour, e.isbn FROM emprunt AS e JOIN usager AS u on u.code_barre = e.code_barre JOIN livre AS l on l.isbn = e.isbn';
     }
 }

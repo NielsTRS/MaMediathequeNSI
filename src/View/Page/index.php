@@ -12,7 +12,11 @@ use Core\Controller\UserController;
         <div class="col-md-3 offset-md-2">
             <div class="d-flex flex-column -mt-auto">
                 <?php if (UserController::isConnected()) {
-                    echo '<a class="btn btn-lg btn-primary" href="' . WEB_ROOT . 'deconnexion">Se déconnecter <span class="fas fa-user"></span></a>';
+                    if (UserController::isCurrentAdmin()) {
+                        echo '<a class="btn btn-lg btn-primary" href="' . WEB_ROOT . 'livre/admin">Espace Administration <span class="fas fa-user"></span></a>';
+                    } else {
+                        echo '<a class="btn btn-lg btn-primary" href="' . WEB_ROOT . 'profil">Espace Personnel <span class="fas fa-user"></span></a>';
+                    }
                 } else {
                     echo '<a class="btn btn-lg btn-primary" href="' . WEB_ROOT . 'connexion">Espace Personnel <span class="fas fa-user"></span></a>';
                 } ?>
