@@ -10,6 +10,7 @@ use Core\Controller\UserController;
                 <h1><?php echo htmlspecialchars($datas['titre']); ?></h1>
             </div>
             <h3>Auteur: <?php echo htmlspecialchars($datas['nom']); ?></h3>
+            <h3>Date: <?php echo htmlspecialchars($datas['annee']); ?></h3>
         </div>
         <div class="flex-columns col-4 align-self-center">
             <?php if (is_null($datas['retour'])) {
