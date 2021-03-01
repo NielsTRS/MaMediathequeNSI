@@ -3,7 +3,7 @@
         <div class="col-md-4">
             <label for="search">Recherche:</label>
             <input type="text" class="form-control" name="query" placeholder="Astérix et Obélix" required
-                   value="<?php echo (!is_null($query)) ? $query : null; ?>"/>
+                   value="<?php echo (!is_null($query)) ? htmlspecialchars($query) : null; ?>"/>
         </div>
         <div class="col-md-4">
             <label for="filter">Appliquer un filtre</label>
@@ -31,7 +31,7 @@
     <div class="SearchResult container">
         <hr/>
         <?php if (!is_null($query)) { ?>
-            <p class="alert alert-success">Résultat(s) de votre recherche: <?php echo $query; ?></p>
+            <p class="alert alert-success">Résultat(s) de votre recherche: <?php echo htmlspecialchars($query); ?></p>
         <?php } ?>
     </div>
     <ul class="list-group list-group-flush Books mt-20px">
@@ -40,13 +40,13 @@
             <li class="list-group-item Book d-flex">
                 <div class="me-auto d-flex flex-column">
                     <div class="d-flex">
-                        <h1><?php echo $data['titre']; ?></h1>
+                        <h1><?php echo htmlspecialchars($data['titre']); ?></h1>
                         <?php if (!is_null($data['retour'])) {
                             echo '<p class="badge bg-danger align-self-end" style="margin-left: 10px;">Disponible le
                                 : ' . $data['retour'] . '</p>';
                         } ?>
                     </div>
-                    <h3><?php echo $data['nom'] . ' / ' . $data['annee']; ?></h3>
+                    <h3><?php echo htmlspecialchars($data['nom']) . ' / ' . htmlspecialchars($data['annee']); ?></h3>
                 </div>
                 <div class="d-grid gap-2 d-md-flex align-self-center justify-content-md-end">
                     <a href="<?php echo WEB_ROOT . 'livre/' . $data['isbn']; ?>">

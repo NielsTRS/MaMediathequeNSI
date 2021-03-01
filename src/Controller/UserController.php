@@ -80,9 +80,14 @@ class UserController extends Controller
         header('Location: ' . WEB_ROOT);
     }
 
+    public function profil(string $isbn)
+    {
+
+    }
+
     public static function isCurrentAdmin()
     {
-        if (isset($_SESSION['role']) and !empty($_SESSION['role']) and intval($_SESSION['role']) === UserController::$_ROLE_ADMIN) {
+        if (isset($_SESSION['nom']) and !empty($_SESSION['nom']) and intval($_SESSION['role']) === UserController::$_ROLE_ADMIN) {
             return True;
         } else {
             return False;
