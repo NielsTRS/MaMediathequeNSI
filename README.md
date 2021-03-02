@@ -25,6 +25,7 @@ Paquets nécessaires :
 * php
 * mysql
 * phpmyadmin
+* apache
 
 Téléchargement des fichiers :
 
