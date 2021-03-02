@@ -5,15 +5,20 @@ use Core\Controller\UserController;
 ?>
 <div class="container MainContent">
     <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a href="<?php echo WEB_ROOT; ?>profil/<?php echo $_SESSION['code']; ?>" class="nav-link active"
-               data-bs-toggle="tab" data-bs-target="#member"
-               role="tab" aria-selected="true">Onglet membre</a>
-        </li>
+        <?php if (UserController::isConnected()) { ?>
+            <li class="nav-item">
+                <a href="<?php echo WEB_ROOT; ?>profil/<?php echo $_SESSION['code']; ?>" class="nav-link active"
+                   data-bs-toggle="tab" data-bs-target="#member"
+                   role="tab" aria-selected="true">Onglet membre</a>
+            </li>
+        <?php } ?>
         <?php if (UserController::isCurrentAdmin()) { ?>
             <li class="nav-item">
-                <a href="<?php echo WEB_ROOT; ?>livre/admin" class="nav-link" role="tab" aria-selected="true">Onglet
-                    administrateur</a>
+                <a href="<?php echo WEB_ROOT; ?>emprunt/admin" class="nav-link" role="tab"
+                   aria-selected="true">Emprunts</a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo WEB_ROOT; ?>livre/admin" class="nav-link" role="tab" aria-selected="true">Livres</a>
             </li>
         <?php } ?>
     </ul>
@@ -22,8 +27,10 @@ use Core\Controller\UserController;
             <div class="container mt-20px">
                 <div class="row PersonnalInformation">
                     <i class="fas fa-user col-md-1 display-1 float-start"></i>
-                    <div class="col-md-4">
-                        <h1>Bienvenue <?php echo htmlspecialchars($datas['nom']); ?> !</h1>
+                    <div class="col-md-6">
+                        <h1>
+                            Bienvenue <?php echo htmlspecialchars($datas['nom']) . ' ' . htmlspecialchars($datas['prenom']); ?>
+                            !</h1>
                         <p>Bienvenue dans votre espace personnel</p>
                     </div>
                 </div>

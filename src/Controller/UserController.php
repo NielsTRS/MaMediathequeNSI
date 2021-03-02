@@ -79,9 +79,9 @@ class UserController extends Controller
                 if ($user !== false and password_verify($password, $user['password'])) {
                     $_SESSION['nom'] = $nom;
                     $_SESSION['code'] = $user['code_barre'];
-//                    $_SESSION['csrf'] = strval(bin2hex(random_bytes(16)));
+//                    $_SESSION['csrf'] = strval(bin2hex(random_bytes(16))); protection crsf
                     $_SESSION['role'] = $user['role'];
-                    header('Location: ' . WEB_ROOT);
+                    header('Location: ' . WEB_ROOT.'profil/'.$_SESSION['code']);
                 } else {
                     $msg = 'Identifiant ou mot de passe incorect';
                 }

@@ -1,5 +1,8 @@
 <div class="container MainContent">
     <ul class="nav nav-tabs">
+        <li class="nav-item"><a href="<?php echo WEB_ROOT; ?>profil/<?php echo $_SESSION['code']; ?>" class="nav-link"
+                                role="tab"
+                                aria-selected="true">Onglet Membre</a></li>
         <li class="nav-item"><a href="<?php echo WEB_ROOT; ?>emprunt/admin" class="nav-link" role="tab"
                                 aria-selected="true">Emprunt</a></li>
         <li class="nav-item"><a href="<?php echo WEB_ROOT; ?>livre/admin" class="nav-link active" data-bs-toggle="tab"

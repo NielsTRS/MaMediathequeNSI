@@ -1,9 +1,12 @@
 <div class="container MainContent">
     <ul class="nav nav-tabs">
-        <li class="nav-item"><a href="<?php echo WEB_ROOT; ?>livre/admin" class="nav-link" role="tab"
-                                aria-selected="true">Livre</a></li>
+        <li class="nav-item"><a href="<?php echo WEB_ROOT; ?>profil/<?php echo $_SESSION['code']; ?>" class="nav-link"
+                                role="tab"
+                                aria-selected="true">Onglet Membre</a></li>
         <li class="nav-item"><a href="<?php echo WEB_ROOT; ?>emprunt/admin" class="nav-link active" data-bs-toggle="tab"
                                 role="tab" aria-selected="true">Emprunt</a></li>
+        <li class="nav-item"><a href="<?php echo WEB_ROOT; ?>livre/admin" class="nav-link" role="tab"
+                                aria-selected="true">Livre</a></li>
     </ul>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane" id="member" role="tabpanel" aria-labelledby="member-tab">Membre</div>
@@ -17,7 +20,7 @@
                                 <li class="list-group-item d-flex">
                                     <div class="d-flex me-auto">
                                         <div class="d-flex flex-column">
-                                            <p class="h4 text-center"><?php echo "".htmlspecialchars($data['nom'])." ".htmlspecialchars($data['prenom']); ?></p>
+                                            <p class="h4 text-center"><?php echo "" . htmlspecialchars($data['nom']) . " " . htmlspecialchars($data['prenom']); ?></p>
                                             <div class="d-flex">
                                                 <a class="h2" style="text-decoration: none;"
                                                    href="<?php echo WEB_ROOT; ?>livre/profil/<?php echo $data['isbn']; ?>"><?php echo htmlspecialchars($data['titre']); ?></a>

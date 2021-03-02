@@ -65,7 +65,7 @@ class UserModel extends Model
      */
     public function getUserByCode(string $code)
     {
-        $req = $this->getDB()->prepare('SELECT nom FROM usager WHERE code_barre = ?');
+        $req = $this->getDB()->prepare('SELECT nom, prenom FROM usager WHERE code_barre = ?');
         $req->execute([$code]);
         return $req->fetch();
     }
