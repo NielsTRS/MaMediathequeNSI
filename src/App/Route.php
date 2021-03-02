@@ -2,6 +2,7 @@
 
 namespace Core\App;
 
+use Exception;
 
 /**
  * Class Route
@@ -39,25 +40,25 @@ class Route
     }
 
     /**
-     * Get the params from the url
+     * Get the url with the params
      * @param $url
      * @return bool
      */
     public function match($url)
     {
         $url = trim($url, '/');
-        $path = preg_replace_callback('#:([\w]+)#', [$this, 'paramMatch'], $this->_path);
+        $path = preg_replace_callback('#:([\w]+)#', [$this, 'paramMatch'], $this->_path); // regex in order to get params and call the private function paramMatch
         $regex = "#^$path$#i";
         if (!preg_match($regex, $url, $matches)) {
             return false;
         }
-        array_shift($matches);
+        array_shift($matches); // unstack elements
         $this->_matches = $matches;
         return true;
     }
 
     /**
-     * Call a controller
+     * Call a controller with params
      * @return false|mixed
      */
     public function call()
@@ -65,14 +66,15 @@ class Route
         if (is_string($this->_callable)) {
             $params = explode('#', $this->_callable);
             $controller = "Core\\Controller\\" . $params[0] . "Controller";
-            $controller = new $controller();
-            return call_user_func_array([$controller, $params[1]], $this->_matches);
+            $controller = new $controller(); // call the controler
+            return call_user_func_array([$controller, $params[1]], $this->_matches); // run the function with params
         } else {
-            return call_user_func_array($this->_callable, $this->_matches);
+            throw new Exception('The callable param is not a controller');
         }
     }
 
     /**
+     * Create regex with params
      * @param $match
      * @return string
      */

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Show errors
+ */
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
@@ -12,9 +15,9 @@ define('WEB_ROOT', str_replace('index.php', '', 'http://' . $_SERVER['HTTP_HOST'
  */
 define('ROOT', str_replace('public/index.php', '', $_SERVER['SCRIPT_FILENAME']));
 
-session_start();
+session_start(); // start session variables
 
-require('../vendor/autoload.php');
+require('../vendor/autoload.php'); // autoloader from composer
 
 use Core\App\Router;
 

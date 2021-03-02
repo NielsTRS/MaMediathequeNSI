@@ -36,9 +36,9 @@ abstract class Model
     protected function getDB(): PDO
     {
         try {
-            return new PDO("mysql:host=$this->_host;dbname=$this->_dbname", $this->_user, $this->_password);
+            return new PDO("mysql:host=$this->_host;dbname=$this->_dbname", $this->_user, $this->_password); // create connexion with database
         } catch (Exception $e) {
-            die($e->getMessage());
+            die($e->getMessage()); // show error
         }
     }
 }
